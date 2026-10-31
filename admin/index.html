@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Elementa Admin</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--line:#26334d;--muted:#9aa8c2;--text:#edf3ff;--accent:#8bd5ca;--red:#ff8585;--yellow:#f2d38a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#17233b 0,#0b1020 55%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{width:min(1080px,calc(100% - 32px));margin:48px auto}header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:28px}h1{font-size:clamp(26px,5vw,38px);margin:0;letter-spacing:-1px}h2{font-size:21px;margin:0 0 16px}.sub,.muted{color:var(--muted)}.panel{background:#121a2deF;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 18px 60px #0003;margin-bottom:18px}
+input,textarea,select{width:100%;background:#0b1324;border:1px solid #34435f;color:var(--text);border-radius:10px;padding:12px;font:inherit}label{display:block;font-size:13px;color:var(--muted);margin:14px 0 6px}button,.btn{border:1px solid #3a4c69;border-radius:10px;padding:9px 13px;color:var(--text);background:#1a2942;font:inherit;cursor:pointer}button:hover{border-color:var(--accent)}button:disabled{opacity:.5;cursor:not-allowed}.primary{background:#b7eee2;color:#09201e;border-color:#b7eee2;font-weight:700}.danger{color:#ffaaaa;border-color:#74404a}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.grow{flex:1}.hidden{display:none!important}.notice{padding:12px 14px;border-radius:10px;background:#1a2942;color:var(--muted);margin:12px 0}.notice.error{color:#ffb4b4;background:#351e2a}.notice.ok{color:#b7eee2;background:#17332f}.review{border-top:1px solid var(--line);padding:18px 0}.review:first-child{border-top:0}.review h3{margin:0;font-size:16px}.review p{white-space:pre-wrap;overflow-wrap:anywhere;margin:10px 0}.stars{color:var(--yellow)}.pill{font-size:12px;padding:3px 9px;border-radius:20px;background:#26334d;color:#c7d5ee}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.topstats{display:flex;gap:10px;flex-wrap:wrap}.topstats span{background:#0b1324;border:1px solid var(--line);padding:8px 12px;border-radius:10px;color:var(--muted)}.topstats b{color:var(--text)}.empty{text-align:center;padding:35px;color:var(--muted)}a{color:var(--accent)}@media(max-width:600px){main{margin:24px auto}.panel{padding:17px}header{align-items:flex-start}}
+</style>
+</head>
+<body>
+<main>
+<header><div><h1>Elementa <span style="color:#8bd5ca">Admin</span></h1><div class="sub">Private site management</div></div><a href="/" aria-label="Back to website">← View website</a></header>
+<section id="login" class="panel" style="max-width:460px;margin:8vh auto">
+<h2>Admin sign in</h2><p class="sub">Sign in with the owner account registered in Elementa.</p>
+<form id="loginForm"><label for="email">Email</label><input id="email" type="email" autocomplete="username" required><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required><div class="row" style="margin-top:18px"><button class="primary" id="loginBtn" type="submit">Sign in</button></div></form>
+<div id="loginMsg" class="notice hidden" role="status"></div>
+</section>
+<section id="app" class="hidden">
+<div class="panel"><div class="row"><div class="grow"><h2 style="margin:0">Dashboard</h2><div class="sub" id="signedIn"></div></div><button id="refresh">Refresh</button><button id="logout">Sign out</button></div><div class="topstats" style="margin-top:18px"><span>Reviews <b id="reviewCount">—</b></span><span>Reports <b id="reportCount">—</b></span></div></div>
+<div class="panel"><div class="row"><h2 class="grow">Reviews</h2><select id="filter" style="width:auto;min-width:145px"><option value="all">All statuses</option><option value="visible">Visible</option><option value="hidden">Hidden</option><option value="flagged">Flagged</option></select></div><div id="reviews"><div class="empty">Loading reviews…</div></div></div>
+<div class="panel"><h2>Recent reports</h2><div id="reports"><div class="empty">Loading reports…</div></div></div>
+</section>
+<div id="globalMsg" class="notice hidden" role="status"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/config.js"></script>
+<script src="/admin/admin.js"></script>
+</body></html>
