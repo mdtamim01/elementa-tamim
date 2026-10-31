@@ -1,3 +1,6 @@
-// Paste your Supabase Project URL and anon/publishable key. These are designed to be public; row-level security protects the data.
-// NEVER put the service_role / secret key here.
-window.ELEMENTA_CONFIG = { SUPABASE_URL: "https://nlmcefgiivesqpcqjsnj.supabase.co", SUPABASE_ANON_KEY: "" };
+// Public Supabase project URL and publishable key. RLS and server-side checks protect private data.
+// NEVER put a service_role / secret key in this file.
+window.ELEMENTA_CONFIG = {
+  SUPABASE_URL: "https://nlmcefgiivesqpcqjsnj.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_-DYCZrit9iJKNFSNHCgEfA_5qvpuQtU"
+};
