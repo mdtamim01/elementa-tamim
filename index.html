@@ -1,0 +1,220 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Elementa — Interactive Periodic Table of the 118 Elements for Students</title>
+<meta name="description" content="Elementa is an interactive periodic table for students: explore all 118 chemical elements, electron configurations, an Atomic Lab and a quiz, in English and Bangla.">
+<link rel="canonical" href="https://elementa-by-tamim.netlify.app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-20 -20 40 40'%3E%3Cellipse rx='17' ry='7' fill='none' stroke='%2358DDF5' stroke-width='2'/%3E%3Cellipse rx='17' ry='7' fill='none' stroke='%239A8CFF' stroke-width='2' transform='rotate(60)'/%3E%3Cellipse rx='17' ry='7' fill='none' stroke='%2358DDF5' stroke-width='2' transform='rotate(120)'/%3E%3Ccircle r='4' fill='%239A8CFF'/%3E%3C/svg%3E">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Elementa">
+<meta property="og:title" content="Elementa — The Living Periodic Table">
+<meta property="og:description" content="Interactive periodic table of the 118 chemical elements for students.">
+<meta property="og:url" content="https://elementa-by-tamim.netlify.app/">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Elementa — The Living Periodic Table","url":"https://elementa-by-tamim.netlify.app/","applicationCategory":"EducationalApplication","author":{"@type":"Person","name":"MD Tamim Iqbal"},"inLanguage":["en","bn"],"description":"Interactive periodic table of the 118 chemical elements for students."}</script>
+
+<style>
+:root{--bg:#F6F8FC;--s1:#fff;--s2:#E9EEF7;--tx:#0B1424;--t2:#46546B;--cy:#8A5A00;--vi:#6B4A00;--bd:#C9D3E3;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#05070F;--s1:#0A1020;--s2:#111A30;--tx:#F7F1E3;--t2:#B4B9C8;--cy:#E6B65C;--vi:#F5DDA4;--bd:#2A3350;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#05070F;--s1:#0A1020;--s2:#111A30;--tx:#F7F1E3;--t2:#B4B9C8;--cy:#E6B65C;--vi:#F5DDA4;--bd:#2A3350;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 Inter,system-ui,"Noto Sans Bengali","Segoe UI",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--s1)}
+button,select,input{font:inherit;color:var(--tx)}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--cy);outline-offset:2px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:25;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 20px;background:var(--s1);border-bottom:1px solid var(--bd)}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.14em}.logo svg{width:30px;height:30px}
+nav{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.b{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:7px 12px;min-height:40px}.b:hover{border-color:var(--cy)}
+.b.p{background:linear-gradient(135deg,#E6B65C,#F5DDA4);color:#1a1206;border:0;font-weight:600}
+main{max-width:1240px;margin:auto;padding:0 20px}section{padding:44px 0}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;padding-top:56px}
+h1{font-size:clamp(34px,5vw,58px);line-height:1.08;margin:0 0 14px;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--cy),var(--vi));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--t2);font-size:18px;max-width:560px}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.fig{text-align:center;color:var(--t2);font-size:13px}.fig svg{width:100%;max-width:340px}
+h2{font-size:26px;margin:0 0 6px}.mut{color:var(--t2)}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.ctl input,.ctl select,.f input,.f select{background:var(--s1);border:1px solid var(--bd);border-radius:8px;padding:8px 12px;min-height:40px}.ctl input{flex:1;min-width:200px}
+#pv{min-height:48px;padding:10px 14px;background:var(--s1);border:1px solid var(--bd);border-radius:10px;margin-bottom:10px}
+#lg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+#lg button{display:flex;gap:6px;align-items:center;background:var(--s1);border:1px solid var(--bd);border-radius:20px;padding:3px 10px;font-size:13px}
+#lg button[aria-pressed=true]{border-color:var(--cy);background:var(--s2)}#lg i{width:12px;height:12px;border-radius:3px;background:var(--c)}
+.sc{overflow-x:auto;padding:6px 2px 14px}
+#g{display:grid;grid-template-columns:repeat(18,minmax(54px,1fr));grid-template-rows:repeat(7,auto) 14px repeat(2,auto);gap:4px;min-width:1000px}
+.t{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;aspect-ratio:1/1.05;min-width:0;padding:2px;border:1px solid color-mix(in srgb,var(--c) 55%,var(--bd));border-top:3px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 16%,var(--s1));transition:transform .18s,box-shadow .18s,opacity .18s}
+.t:hover,.t:focus-visible{transform:translateY(-3px);box-shadow:0 6px 18px color-mix(in srgb,var(--c) 45%,transparent);z-index:2}.t.d{opacity:.17}
+.t .z{position:absolute;top:2px;left:4px;font-size:10px;color:var(--t2)}.t .k{position:absolute;top:2px;right:3px;font-size:9px;font-weight:700;color:var(--t2)}
+.t b{font-size:clamp(15px,1.7vw,21px);line-height:1.1}.t .n,.t .w{font-size:clamp(9px,.8vw,11px);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.t .w{color:var(--t2)}
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:20px}
+.lab{display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:center}.lab svg{width:100%;max-width:260px}
+.f{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}.f label{display:grid;gap:3px;font-size:13px;color:var(--t2)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:14px 0}dt{color:var(--t2)}dd{margin:0;font-weight:500}
+sup{font-size:.7em}details{margin:12px 0;padding:10px 14px;background:var(--s2);border-radius:10px}summary{cursor:pointer;font-weight:600}
+#p{position:fixed;top:0;right:0;bottom:0;width:min(390px,100%);background:var(--s1);border-left:1px solid var(--bd);transform:translateX(100%);visibility:hidden;transition:transform .22s,visibility .22s;overflow:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 18px calc(24px + env(safe-area-inset-bottom,0px));z-index:20}
+#p.o{transform:none;visibility:visible}.x{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:12px;width:40px;height:40px;border-radius:8px;background:var(--s2);border:1px solid var(--bd);font-size:22px}
+.ph{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-left:6px solid var(--c);padding-left:12px}.ph b{font-size:52px;line-height:1}.ph h2{margin:0}.ph span{color:var(--t2)}
+.cf{font-size:20px;font-weight:600;color:var(--cy)}
+.qo{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px}
+.ok{border-color:#2fa866!important}.no{border-color:#d9534f!important}
+ul{padding-left:20px}a{color:var(--cy)}footer{padding:30px 20px;text-align:center;color:var(--t2);font-size:14px}
+@media(max-width:800px){.hero,.lab{grid-template-columns:1fr}nav{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+h1,h2,.wt{font-family:Georgia,"Times New Roman",serif}
+body{background:radial-gradient(900px 500px at 85% -5%,rgba(230,182,92,.10),transparent),radial-gradient(800px 500px at 0 15%,rgba(40,70,160,.20),transparent),var(--bg)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding-top:0}.fc button{background:linear-gradient(160deg,var(--s2),var(--s1));border:1px solid var(--bd);border-radius:14px;padding:18px 12px;text-align:center;transition:transform .2s,border-color .2s,box-shadow .2s}
+.fc button:hover{transform:translateY(-3px);border-color:var(--cy);box-shadow:0 8px 24px rgba(230,182,92,.15)}.fc b{display:block;font:600 30px Georgia,serif;color:var(--cy)}.fc span{display:block;font-weight:600}.fc small{color:var(--t2)}
+.rv{display:grid;grid-template-columns:minmax(280px,1fr) 1.3fr;gap:18px;align-items:start}.rv label{display:grid;gap:4px;margin:10px 0;color:var(--t2);font-size:14px}.rv input[type=text],.rv textarea{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:9px 12px;color:var(--tx);width:100%}
+.stars{border:0;padding:0;margin:0;display:flex;gap:2px;flex-wrap:wrap}.stars legend{padding:0;color:var(--t2);font-size:14px;margin-bottom:4px}.stars label{position:relative;font-size:32px;line-height:1;margin:0;color:var(--bd);cursor:pointer}.stars label.on{color:var(--cy)}.stars input{position:absolute;opacity:0;inset:0}.stars label:focus-within{outline:3px solid var(--cy);outline-offset:2px;border-radius:6px}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}.gold{color:var(--cy)}#rl{list-style:none;padding:0;margin:0}#rl li{border-bottom:1px solid var(--bd);padding:12px 0}#rl p{margin:6px 0;overflow-wrap:anywhere}.lk{background:none;border:0;color:var(--t2);text-decoration:underline;padding:6px;min-height:32px}
+.ok-m{color:color-mix(in srgb,#2fa866 65%,var(--tx))}.err-m{color:color-mix(in srgb,#e5484d 65%,var(--tx))}
+.ft{text-align:left;background:linear-gradient(180deg,transparent,var(--s1));border-top:1px solid var(--bd);padding:40px 20px 24px;color:var(--tx)}.ftg{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr .8fr;gap:28px}.ft h3{font:600 16px Georgia,serif;color:var(--cy);margin:0 0 10px}.ft p{margin:6px 0}.ft nav{display:grid;gap:2px;margin:0;justify-items:start}.ft a{color:var(--tx)}
+.sb{display:inline-flex;align-items:center;gap:10px;margin:0 8px 10px 0;padding:9px 16px 9px 10px;border-radius:999px;border:1px solid;background:var(--s2);color:var(--tx);text-decoration:none;font-weight:600;transition:transform .2s,box-shadow .2s}.sb svg{width:26px;height:26px}.sb:hover{transform:translateY(-2px)}
+.wa{border-color:#25D366}.wa:hover{box-shadow:0 6px 18px rgba(37,211,102,.3)}.fb{border-color:#1877F2}.fb:hover{box-shadow:0 6px 18px rgba(24,119,242,.3)}.cp{max-width:1240px;margin:26px auto 0;padding-top:16px;border-top:1px solid var(--bd);color:var(--t2);font-size:14px}
+#wl{position:fixed;inset:0;z-index:40;overflow:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 20px;color:#F7F1E3;transition:opacity .5s;background:radial-gradient(1px 1px at 12% 22%,#fff,transparent),radial-gradient(1px 1px at 78% 14%,#fff,transparent),radial-gradient(1.5px 1.5px at 88% 60%,#F5DDA4,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(1px 1px at 55% 8%,#F5DDA4,transparent),radial-gradient(1px 1px at 6% 80%,#fff,transparent),radial-gradient(700px 420px at 50% 28%,rgba(230,182,92,.16),transparent),radial-gradient(800px 500px at 90% 90%,rgba(60,50,150,.35),transparent),#05070F}
+#wl[hidden]{display:none}#wl.out{opacity:0;pointer-events:none}#wl svg{width:min(250px,56vw);height:auto}.orb{animation:sp 70s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.wk{letter-spacing:.3em;font-size:12px;color:#E6B65C;margin:6px 0}.wm{font:600 clamp(40px,8vw,64px)/1 Georgia,serif;background:linear-gradient(180deg,#F5DDA4,#C98F2E);-webkit-background-clip:text;background-clip:text;color:transparent;margin:0}
+.wg{font:600 clamp(26px,5vw,36px) Georgia,serif;margin:14px 0 0}.wb{font:italic 600 clamp(20px,4vw,26px) Georgia,serif;color:#E6B65C;margin:2px 0 12px}.wp{max-width:460px;color:#B4B9C8;margin:4px auto}
+#enter{margin-top:16px;padding:14px 34px;border-radius:999px;border:0;background:linear-gradient(135deg,#E6B65C,#F5DDA4);color:#1a1206;font-weight:700;letter-spacing:.06em;box-shadow:0 0 28px rgba(230,182,92,.35);transition:transform .2s,box-shadow .2s}#enter:hover{transform:translateY(-2px);box-shadow:0 0 38px rgba(230,182,92,.5)}
+@media(max-width:800px){.fc{grid-template-columns:1fr 1fr}.rv,.ftg{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<div id="wl" role="dialog" aria-modal="true" aria-labelledby="wg"><svg viewBox="-150 -150 300 300" role="img" aria-label="Atom with glowing nucleus and orbiting electrons"><defs><radialGradient id="nu"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#F5DDA4"/><stop offset="1" stop-color="#C98F2E" stop-opacity="0"/></radialGradient></defs><g class="orb" fill="none" stroke="#E6B65C" stroke-width="2" opacity=".9"><ellipse rx="120" ry="42"/><ellipse rx="120" ry="42" transform="rotate(60)"/><ellipse rx="120" ry="42" transform="rotate(120)"/><circle cx="120" r="7" fill="#F5DDA4" stroke="none"/><circle cx="-60" cy="-104" r="7" fill="#F5DDA4" stroke="none"/><circle cx="-60" cy="104" r="7" fill="#F5DDA4" stroke="none"/></g><circle r="40" fill="url(#nu)"/><circle r="9" fill="#fff"/></svg><p class="wm">Elementa</p><p style="margin:0;font-family:Georgia,serif">The Living Periodic Table</p>
+<p class="wk">A LITTLE DREAM, A BIG BEGINNING</p><h2 class="wg" id="wg">Assalamu Alaikum!</h2><p class="wb">May Allah Bless You</p><p style="font-size:20px;font-weight:600;margin:6px 0">Welcome to My First Project</p>
+<p class="wp">A journey into the fascinating world of elements, atoms, and science.</p><p style="margin:8px 0">Created with care by Tamim</p><button id="enter" type="button">ENTER ELEMENTA →</button><p class="wp" style="margin-top:18px">Explore • Discover • Learn</p></div>
+<header><div class="logo"><svg viewBox="-20 -20 40 40" aria-hidden="true"><ellipse rx="17" ry="7" fill="none" stroke="var(--cy)" stroke-width="2"/><ellipse rx="17" ry="7" fill="none" stroke="var(--vi)" stroke-width="2" transform="rotate(60)"/><ellipse rx="17" ry="7" fill="none" stroke="var(--cy)" stroke-width="2" transform="rotate(120)"/><circle r="4" fill="var(--vi)"/></svg>ELEMENTA</div>
+<nav aria-label="Sections"><button class="b" onclick="go('top')">Home</button><button class="b" onclick="go('table')" data-i="nT">Table</button><button class="b" onclick="go('lab')" data-i="nL">Atomic Lab</button><button class="b" onclick="go('quiz')" data-i="nQ">Quiz</button><button class="b" onclick="go('reviews')">Reviews</button><button class="b" onclick="go('src')" data-i="nS">Sources</button><button class="b" onclick="showWelcome()">Welcome</button><button class="b" id="lb" aria-label="Switch language to Bangla">বাংলা</button><button class="b" id="tb" aria-label="Toggle light and dark theme">◐</button></nav></header>
+<main>
+<section class="hero" id="top"><div><h1 data-i="h1">118 Elements. One Universe of Discovery.</h1><p class="sub" data-i="sub">Explore the building blocks of matter through interactive science, beautiful visualizations, and trusted chemical data.</p>
+<div class="row"><button class="b p" onclick="go('table')" data-i="bT">Explore the Periodic Table</button><button class="b" onclick="go('lab')" data-i="bL">Enter the Atomic Lab</button></div>
+<p class="mut">Explore Every Atom. Understand Everything.</p></div>
+<div class="fig"><svg viewBox="-100 -100 200 200" role="img" aria-label="Conceptual illustration of electron orbits around a nucleus"><g fill="none" stroke-width="1.6"><ellipse rx="88" ry="30" stroke="var(--cy)"/><ellipse rx="88" ry="30" stroke="var(--vi)" transform="rotate(60)"/><ellipse rx="88" ry="30" stroke="var(--cy)" transform="rotate(120)"/></g><circle r="10" fill="var(--vi)"/><circle cx="88" r="5" fill="var(--cy)"/><circle cx="-44" cy="-76" r="5" fill="var(--cy)"/><circle cx="-44" cy="76" r="5" fill="var(--vi)"/><circle cx="-28" cy="-10" r="3" fill="var(--cy)"/></svg><div>Conceptual illustration — not a literal picture of an atom.</div></div></section>
+
+<section class="fc" aria-label="Quick links"><button onclick="go('table')"><b>118</b><span>Elements</span><small>Complete periodic table</small></button><button onclick="go('lab')"><b>Lab</b><span>Atomic Lab</span><small>Protons, neutrons, electrons</small></button><button onclick="go('quiz')"><b>?</b><span>Quiz</span><small>Test your knowledge</small></button><button onclick="go('reviews')"><b>★</b><span>Reviews</span><small>See what others say</small></button></section>
+<section id="table"><h2 data-i="tt">The Periodic Table</h2><p class="mut">Hover or focus a tile for a preview; click or press Enter to open its profile. Each profile has its own link.</p>
+<div class="ctl"><input id="q" type="search" data-p="ph" placeholder="Search by name, symbol or atomic number" aria-label="Search elements"><select id="m" aria-label="Colour mode"><option value="cat">By category</option><option value="blk">By block (s, p, d, f)</option><option value="st">By state at 25 °C, 1 atm</option></select><button class="b" id="rs" data-i="rs">Reset</button></div>
+<div id="pv" aria-live="polite"></div><div id="lg"></div>
+<div class="sc"><div id="g" role="group" aria-label="Periodic table of the elements"></div></div>
+<p class="mut" style="font-size:14px">Rows 9–10 are La–Yb (57–70) and Ac–No (89–102). Lu and Lr sit in group 3, following the IUPAC 2021 provisional recommendation. “Atomic weight” means the abridged standard atomic weight; values in [brackets] are the mass number of the longest-lived known isotope (no standard value exists). Categories and states follow common textbook conventions, which vary between sources.</p></section>
+
+<section id="lab"><h2 data-i="lt">Atomic Lab</h2><p class="mut">Choose an element, an isotope (mass number) and an ionic charge. Counts and the diagram update together.</p>
+<div class="card"><div class="f"><label>Element<select id="le"></select></label><label>Mass number A<input id="la" type="number" min="1" max="400" placeholder="e.g. 12" style="width:120px"></label><label>Charge<input id="lq" type="number" min="-4" max="8" value="0" style="width:90px"></label></div><div class="lab" id="lo"></div></div></section>
+
+<section id="quiz"><h2>Quick Quiz</h2><p class="mut">Five questions, generated from the table data above.</p><div class="card"><div class="f"><label>Difficulty<select id="qd"><option value="20">Easy · elements 1–20</option><option value="54">Medium · 1–54</option><option value="118">Hard · all 118</option></select></label><button class="b p" id="qs" style="align-self:end">Start quiz</button></div><div id="qa" aria-live="polite"></div></div></section>
+
+<section id="reviews"><h2>Community Reviews</h2><p class="mut">Your display name and review are shown publicly. Please don’t include private details. See the <a href="privacy.html">Privacy Policy</a>.</p>
+<div class="rv"><form id="rf" class="card" novalidate aria-labelledby="rft"><h3 id="rft" style="margin:0">Rate Elementa</h3><fieldset class="stars"><legend>Your rating</legend><label><input type="radio" name="rt" value="1"><span aria-hidden="true">★</span><span class="sr">1 star</span></label><label><input type="radio" name="rt" value="2"><span aria-hidden="true">★</span><span class="sr">2 stars</span></label><label><input type="radio" name="rt" value="3"><span aria-hidden="true">★</span><span class="sr">3 stars</span></label><label><input type="radio" name="rt" value="4"><span aria-hidden="true">★</span><span class="sr">4 stars</span></label><label><input type="radio" name="rt" value="5"><span aria-hidden="true">★</span><span class="sr">5 stars</span></label></fieldset>
+<label>Display name<input id="rn" type="text" maxlength="40" autocomplete="name" required></label><label>Your review<textarea id="rb" rows="4" maxlength="1000" required></textarea></label><small id="rc" class="mut">0 / 1000</small>
+<div class="hp" aria-hidden="true"><label>Website<input id="rw" type="text" tabindex="-1" autocomplete="off"></label></div>
+<button class="b p" id="rsub" type="submit">Submit review</button><p id="rm" role="status"></p></form>
+<div class="card"><p id="rs2" aria-live="polite" style="margin-top:0"></p><ol id="rl"></ol><p id="re">Loading reviews…</p><button class="b" id="rmore" type="button" hidden>Load more</button></div></div></section>
+<section id="src"><h2>Sources &amp; Honest Limitations</h2><div class="card">
+<p>Reference organisations whose conventions this table follows (open the originals to check any value):</p>
+<ul><li><a href="https://iupac.org/what-we-do/periodic-table-of-elements/" target="_blank" rel="noopener">IUPAC — periodic table, names and symbols</a></li><li><a href="https://ciaaw.org/" target="_blank" rel="noopener">CIAAW — standard atomic weights and isotopes</a></li><li><a href="https://www.nist.gov/pml/productsservices/physical-reference-data" target="_blank" rel="noopener">NIST — physical reference data</a></li><li><a href="https://pubchem.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubChem — element and compound data</a></li><li><a href="https://www.iaea.org/" target="_blank" rel="noopener">IAEA — nuclear and isotope data</a></li><li><a href="https://www.rsc.org/" target="_blank" rel="noopener">Royal Society of Chemistry — education and history</a></li></ul>
+<p><b>Data status.</b> Names, symbols, atomic numbers, abridged atomic weights, categories and states were entered into this build by hand following those conventions. They were <b>not</b> retrieved or cross-checked against the live databases, so none is labelled “cross-checked”. The self-check below tests internal consistency only.</p>
+<p id="st"></p>
+<p><b>Not built yet:</b> density, melting/boiling points, electronegativity and other property data with per-value provenance; heatmaps and the trends explorer; isotope explorer; compound and reaction labs; comparison tool; glossary and learning paths; Bangla beyond the interface labels and a few explanations (it needs expert review; element names stay in English); photographs; 3D and orbital views; profile sections for history, occurrence, uses and safety; printable sheets; per-element SEO pages. Elements 104–118 have predicted configurations and states that are not established experimentally.</p></div></section>
+</main><footer class="ft" id="about"><div class="ftg"><div><div class="logo"><svg viewBox="-20 -20 40 40" width="30" height="30" aria-hidden="true"><ellipse rx="17" ry="7" fill="none" stroke="var(--cy)" stroke-width="2"/><ellipse rx="17" ry="7" fill="none" stroke="var(--vi)" stroke-width="2" transform="rotate(60)"/><ellipse rx="17" ry="7" fill="none" stroke="var(--cy)" stroke-width="2" transform="rotate(120)"/><circle r="4" fill="var(--vi)"/></svg>ELEMENTA</div><p class="mut">An interactive periodic table for students: explore the 118 elements, try the Atomic Lab and test yourself with quizzes.</p></div>
+<div><h3>Creator</h3><p><b>MD Tamim Iqbal</b><br>Founder &amp; Creator of Elementa</p><p class="mut"><i>Building a better way to explore the world of chemistry.</i></p></div>
+<div id="contact"><h3>Contact</h3><a class="sb wa" href="https://wa.me/8801924761995" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#25D366"/><path fill="#fff" d="M12 4.6a7.4 7.4 0 0 0-6.3 11.2l-1 3.6 3.7-1A7.4 7.4 0 1 0 12 4.6z"/><path fill="#25D366" d="M9.4 8.6c.2-.2.5-.2.7.1l.7 1.3c.1.2 0 .4-.1.6l-.4.4c.5.9 1.2 1.6 2.1 2.1l.4-.4c.2-.2.4-.2.6-.1l1.3.7c.3.2.3.5.1.7-.5.6-1.1.8-1.8.7-2.2-.3-3.9-2-4.2-4.2-.1-.7.1-1.3.6-1.9z"/></svg>Contact on WhatsApp</a><a class="sb fb" href="https://www.facebook.com/share/1Fd4vDye3q/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.7V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.8v8h3.2z"/></svg>Visit My Facebook</a><p class="mut">WhatsApp: +8801924761995</p></div>
+<nav aria-label="Footer"><h3>Explore</h3><button class="lk" onclick="go('table')">Periodic Table</button><button class="lk" onclick="go('reviews')">Reviews</button><button class="lk" onclick="go('about')">About</button><button class="lk" onclick="go('contact')">Contact</button><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></nav></div>
+<p class="cp">© 2026 Elementa. Created by MD Tamim Iqbal. All rights reserved.</p></footer>
+<aside id="p" role="dialog" aria-labelledby="pt" aria-hidden="true"></aside>
+<script>
+const $=id=>document.getElementById(id);
+const D="H Hydrogen 1.008,He Helium 4.0026,Li Lithium 6.94,Be Beryllium 9.0122,B Boron 10.81,C Carbon 12.011,N Nitrogen 14.007,O Oxygen 15.999,F Fluorine 18.998,Ne Neon 20.180,Na Sodium 22.990,Mg Magnesium 24.305,Al Aluminium 26.982,Si Silicon 28.085,P Phosphorus 30.974,S Sulfur 32.06,Cl Chlorine 35.45,Ar Argon 39.948,K Potassium 39.098,Ca Calcium 40.078,Sc Scandium 44.956,Ti Titanium 47.867,V Vanadium 50.942,Cr Chromium 51.996,Mn Manganese 54.938,Fe Iron 55.845,Co Cobalt 58.933,Ni Nickel 58.693,Cu Copper 63.546,Zn Zinc 65.38,Ga Gallium 69.723,Ge Germanium 72.630,As Arsenic 74.922,Se Selenium 78.971,Br Bromine 79.904,Kr Krypton 83.798,Rb Rubidium 85.468,Sr Strontium 87.62,Y Yttrium 88.906,Zr Zirconium 91.224,Nb Niobium 92.906,Mo Molybdenum 95.95,Tc Technetium [98],Ru Ruthenium 101.07,Rh Rhodium 102.91,Pd Palladium 106.42,Ag Silver 107.87,Cd Cadmium 112.41,In Indium 114.82,Sn Tin 118.71,Sb Antimony 121.76,Te Tellurium 127.60,I Iodine 126.90,Xe Xenon 131.29,Cs Caesium 132.91,Ba Barium 137.33,La Lanthanum 138.91,Ce Cerium 140.12,Pr Praseodymium 140.91,Nd Neodymium 144.24,Pm Promethium [145],Sm Samarium 150.36,Eu Europium 151.96,Gd Gadolinium 157.25,Tb Terbium 158.93,Dy Dysprosium 162.50,Ho Holmium 164.93,Er Erbium 167.26,Tm Thulium 168.93,Yb Ytterbium 173.05,Lu Lutetium 174.97,Hf Hafnium 178.49,Ta Tantalum 180.95,W Tungsten 183.84,Re Rhenium 186.21,Os Osmium 190.23,Ir Iridium 192.22,Pt Platinum 195.08,Au Gold 196.97,Hg Mercury 200.59,Tl Thallium 204.38,Pb Lead 207.2,Bi Bismuth 208.98,Po Polonium [209],At Astatine [210],Rn Radon [222],Fr Francium [223],Ra Radium [226],Ac Actinium [227],Th Thorium 232.04,Pa Protactinium 231.04,U Uranium 238.03,Np Neptunium [237],Pu Plutonium [244],Am Americium [243],Cm Curium [247],Bk Berkelium [247],Cf Californium [251],Es Einsteinium [252],Fm Fermium [257],Md Mendelevium [258],No Nobelium [259],Lr Lawrencium [266],Rf Rutherfordium [267],Db Dubnium [268],Sg Seaborgium [269],Bh Bohrium [270],Hs Hassium [269],Mt Meitnerium [278],Ds Darmstadtium [281],Rg Roentgenium [282],Cn Copernicium [285],Nh Nihonium [286],Fl Flerovium [289],Mc Moscovium [290],Lv Livermorium [293],Ts Tennessine [294],Og Oganesson [294]".split(",").map((s,i)=>{const[a,n,m]=s.split(" ");return{z:i+1,s:a,n,m}});
+const CATS=[["Alkali metal","#F25F5C","Alk"],["Alkaline earth metal","#F79F4A","AE"],["Transition metal","#4F9DDE","TM"],["Post-transition metal","#34B6A4","PT"],["Metalloid","#B5C94A","Mtd"],["Nonmetal","#4BC46F","NM"],["Halogen","#E56BC0","Hal"],["Noble gas","#9A8CFF","NG"],["Lanthanoid","#5CCBEE","Ln"],["Actinoid","#C58AE8","An"],["Unknown properties (predicted)","#8A97AB","?"]];
+const BLK=[["s-block","#F25F5C","s"],["p-block","#4BC46F","p"],["d-block","#4F9DDE","d"],["f-block","#C58AE8","f"]];
+const STS=[["Solid","#4F9DDE","S"],["Liquid","#34B6A4","L"],["Gas","#F79F4A","G"],["Unknown / not established","#8A97AB","?"]];
+const inn=(a,z)=>a.includes(z);
+function cat(z){if(inn([3,11,19,37,55,87],z))return 0;if(inn([4,12,20,38,56,88],z))return 1;if(z>=57&&z<=71)return 8;if(z>=89&&z<=103)return 9;
+if((z>=21&&z<=30)||(z>=39&&z<=48)||(z>=72&&z<=80)||(z>=104&&z<=108))return 2;if(inn([13,31,49,50,81,82,83,84],z))return 3;if(inn([5,14,32,33,51,52],z))return 4;
+if(inn([1,6,7,8,15,16,34],z))return 5;if(inn([9,17,35,53,85],z))return 6;if(inn([2,10,18,36,54,86],z))return 7;return 10}
+function pos(z){const p=z<3?1:z<11?2:z<19?3:z<37?4:z<55?5:z<87?6:7,i=z-[0,1,3,11,19,37,55,87][p];
+if(p==1)return[1,i?18:1,0];if(p<4)return[p,i<2?i+1:i+11,0];if(p<6||i<2)return[p,i+1,0];if(i<16)return[p+3,i+1,1];if(i==16)return[p,3,0];return[p,i-13,0]}
+const blk=z=>{const[,c,f]=pos(z);return f?3:(c<3||z==2)?0:c>=13?1:2};
+const st=z=>inn([1,2,7,8,9,10,17,18,36,54,86],z)?2:(z==35||z==80)?1:(z==85||z==87||z>=100)?3:0;
+const MODES={cat:[CATS,cat],blk:[BLK,blk],st:[STS,st]};
+const ORD="1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 4f 5d 6p 7s 5f 6d 7p".split(" "),CAP={s:2,p:6,d:10,f:14};
+function fill(z){const m={};for(const o of ORD){if(z<=0)break;const c=Math.min(z,CAP[o[1]]);m[o]=c;z-=c}return m}
+const NG=[[86,"Rn"],[54,"Xe"],[36,"Kr"],[18,"Ar"],[10,"Ne"],[2,"He"]];
+const EXC={24:[18,"3d5 4s1"],29:[18,"3d10 4s1"],41:[36,"4d4 5s1"],42:[36,"4d5 5s1"],44:[36,"4d7 5s1"],45:[36,"4d8 5s1"],46:[36,"4d10"],47:[36,"4d10 5s1"],57:[54,"5d1 6s2"],58:[54,"4f1 5d1 6s2"],64:[54,"4f7 5d1 6s2"],78:[54,"4f14 5d9 6s1"],79:[54,"4f14 5d10 6s1"],89:[86,"6d1 7s2"],90:[86,"6d2 7s2"],91:[86,"5f2 6d1 7s2"],92:[86,"5f3 6d1 7s2"],93:[86,"5f4 6d1 7s2"],96:[86,"5f7 6d1 7s2"],103:[86,"5f14 7s2 7p1"]};
+function cfg(z){let m;if(EXC[z]){m=fill(EXC[z][0]);EXC[z][1].split(" ").forEach(t=>m[t.slice(0,2)]=+t.slice(2))}else m=fill(z);return m}
+function cfgStr(z){const m=cfg(z),k=o=>o[0]*10+"spdf".indexOf(o[1]);const c=NG.find(([n])=>{if(n>=z)return false;const f=fill(n);return Object.keys(f).every(o=>m[o]===f[o])});const cf=c?fill(c[0]):{};
+return(c?"["+c[1]+"] ":"")+Object.keys(m).filter(o=>m[o]>0&&!(o in cf)).sort((a,b)=>k(a)-k(b)).map(o=>o+"<sup>"+m[o]+"</sup>").join(" ")}
+function shells(m){const r=[];for(const o in m)r[o[0]-1]=(r[o[0]-1]||0)+m[o];return Array.from(r,x=>x||0)}
+function ion(sh,q){const s=[...sh];let i=s.length-1;if(q>0){let n=q;while(n>0&&i>=0){const t=Math.min(n,s[i]);s[i]-=t;n-=t;i--}}else if(q<0){let n=-q;while(n>0){const t=Math.min(n,2*(i+1)**2-(s[i]||0));s[i]=(s[i]||0)+t;n-=t;if(n>0)i++}}while(s.length&&!s[s.length-1])s.pop();return s}
+function bohr(sh){let s=`<svg viewBox="-100 -100 200 200" role="img" aria-label="Simplified Bohr model, electrons per shell: ${sh.join(", ")||"none"}"><circle r="6" fill="var(--vi)"/>`;
+sh.forEach((c,i)=>{const r=14+i*12.5;s+=`<circle r="${r}" fill="none" stroke="var(--bd)"/>`;for(let k=0;k<c;k++){const a=2*Math.PI*k/c-Math.PI/2;s+=`<circle cx="${(r*Math.cos(a)).toFixed(1)}" cy="${(r*Math.sin(a)).toFixed(1)}" r="2.6" fill="var(--cy)"/>`}});return s+"</svg>"}
+/* language */
+const L={en:{nT:"Table",nL:"Atomic Lab",nQ:"Quiz",nS:"Sources",h1:"118 Elements. One Universe of Discovery.",sub:"Explore the building blocks of matter through interactive science, beautiful visualizations, and trusted chemical data.",bT:"Explore the Periodic Table",bL:"Enter the Atomic Lab",tt:"The Periodic Table",lt:"Atomic Lab",rs:"Reset",ph:"Search by name, symbol or atomic number",an:"Atomic number",aw:"Atomic weight",gr:"Group",pe:"Period",bk:"Block",ca:"Category",sa:"State (25 °C, 1 atm)",ec:"Electron configuration",sh:"Electrons per shell",pr:"Protons",ne:"Neutrons",el:"Electrons",es:"Explain simply",
+x1:"An electron configuration lists where an atom’s electrons sit. In 1s², the 1 is the shell, the s is the subshell type, and the small 2 is the number of electrons there. [Ar] is shorthand for the electrons of the noble gas argon.",x2:"Protons = atomic number. Neutrons = mass number − protons, so they depend on the isotope. Electrons = protons − charge, so they depend on the ion.",sol:"Solid",liq:"Liquid",gas:"Gas",unk:"Unknown",pv:"Hover or focus an element to preview it."},
+bn:{nT:"সারণি",nL:"অ্যাটমিক ল্যাব",nQ:"কুইজ",nS:"উৎস",h1:"১১৮টি মৌল। আবিষ্কারের এক মহাবিশ্ব।",sub:"ইন্টারঅ্যাকটিভ বিজ্ঞান ও নির্ভরযোগ্য রাসায়নিক তথ্যের মাধ্যমে পদার্থের মূল উপাদানগুলো জানুন।",bT:"পর্যায় সারণি দেখুন",bL:"অ্যাটমিক ল্যাবে যান",tt:"পর্যায় সারণি",lt:"অ্যাটমিক ল্যাব",rs:"রিসেট",ph:"নাম, প্রতীক বা পারমাণবিক সংখ্যা দিয়ে খুঁজুন",an:"পারমাণবিক সংখ্যা",aw:"পারমাণবিক ভর",gr:"গ্রুপ",pe:"পর্যায়",bk:"ব্লক",ca:"শ্রেণিবিভাগ",sa:"অবস্থা (২৫ °C, ১ atm)",ec:"ইলেকট্রন বিন্যাস",sh:"প্রতিটি শক্তিস্তরে ইলেকট্রন",pr:"প্রোটন",ne:"নিউট্রন",el:"ইলেকট্রন",es:"সহজ ভাষায়",
+x1:"ইলেকট্রন বিন্যাস দেখায় পরমাণুর ইলেকট্রনগুলো কোন শক্তিস্তর ও উপস্তরে আছে। যেমন 1s²-এ ১ হলো শক্তিস্তর, s হলো উপস্তর, আর ছোট ২ হলো সেখানকার ইলেকট্রনের সংখ্যা। [Ar] মানে নিষ্ক্রিয় গ্যাস আর্গনের ইলেকট্রন বিন্যাস।",x2:"প্রোটন সংখ্যা = পারমাণবিক সংখ্যা। নিউট্রন সংখ্যা = ভরসংখ্যা − প্রোটন সংখ্যা (আইসোটোপভেদে ভিন্ন)। ইলেকট্রন সংখ্যা = প্রোটন সংখ্যা − আধান।",sol:"কঠিন",liq:"তরল",gas:"গ্যাস",unk:"অজানা",pv:"দেখতে কোনো মৌলের ওপর মাউস নিন বা ফোকাস করুন।"}};
+let lang="en",mode="cat",flt=null,cur=0,last=null;const tr=k=>L[lang][k]||L.en[k];
+const stN=z=>[tr("sol"),tr("liq"),tr("gas"),tr("unk")][st(z)];
+function applyLang(){document.documentElement.lang=lang=="bn"?"bn":"en";document.querySelectorAll("[data-i]").forEach(n=>n.textContent=tr(n.dataset.i));document.querySelectorAll("[data-p]").forEach(n=>n.placeholder=tr(n.dataset.p));
+$("lb").textContent=lang=="en"?"বাংলা":"English";$("lb").setAttribute("aria-label",lang=="en"?"Switch language to Bangla":"Switch language to English");$("pv").textContent=tr("pv");route();labR()}
+/* table */
+function drawTable(){const[M,f]=MODES[mode];$("g").innerHTML=D.map(e=>{const[r,c]=pos(e.z),x=M[f(e.z)];return`<button class="t" data-z="${e.z}" style="grid-row:${r};grid-column:${c};--c:${x[1]}" aria-label="${e.n}, ${e.s}, atomic number ${e.z}, ${x[0]}"><span class="z">${e.z}</span><span class="k" aria-hidden="true">${x[2]}</span><b>${e.s}</b><span class="n">${e.n}</span><span class="w">${e.m}</span></button>`}).join("");
+$("lg").innerHTML=M.map((x,i)=>`<button data-f="${i}" aria-pressed="${flt===i}" style="--c:${x[1]}"><i></i><b>${x[2]}</b> ${x[0]}</button>`).join("");dim()}
+function dim(){const[M,f]=MODES[mode],s=$("q").value.trim().toLowerCase();document.querySelectorAll(".t").forEach(t=>{const e=D[t.dataset.z-1];const ok=(!s||e.n.toLowerCase().includes(s)||e.s.toLowerCase()==s||String(e.z)==s)&&(flt===null||f(e.z)==flt);t.classList.toggle("d",!ok)})}
+function prev(z){const e=D[z-1],b=e.m[0]=="[";$("pv").innerHTML=`<b>${e.n} (${e.s})</b> · No. ${e.z} · ${CATS[cat(z)][0]} · ${b?"mass no. "+e.m:"atomic weight "+e.m} · ${stN(z)} at 25 °C — <span class="mut">click for the full profile</span>`}
+$("g").addEventListener("mouseover",e=>{const t=e.target.closest(".t");t&&prev(+t.dataset.z)});$("g").addEventListener("focusin",e=>{const t=e.target.closest(".t");t&&prev(+t.dataset.z)});
+$("g").addEventListener("click",e=>{const t=e.target.closest(".t");if(t){last=t;location.hash=D[t.dataset.z-1].n.toLowerCase()}});
+$("lg").addEventListener("click",e=>{const b=e.target.closest("button");if(b){const i=+b.dataset.f;flt=flt===i?null:i;drawTable()}});
+$("m").onchange=e=>{mode=e.target.value;flt=null;drawTable()};$("q").oninput=dim;
+$("q").onkeydown=e=>{if(e.key=="Enter"){const t=document.querySelector(".t:not(.d)");if(t&&document.querySelectorAll(".t.d").length)t.click()}};
+$("rs").onclick=()=>{mode="cat";flt=null;$("q").value="";$("m").value="cat";drawTable();$("pv").textContent=tr("pv")};
+/* panel */
+const P=$("p");
+function panel(e){const z=e.z,m=cfg(z),sh=shells(m),[r,c,f]=pos(z),b=e.m[0]=="[";
+return`<button class="x" data-a="c" aria-label="Close">×</button><div class="ph" style="--c:${CATS[cat(z)][1]}"><b>${e.s}</b><div><h2 id="pt">${e.n}</h2><span>${tr("an")} ${z}</span></div></div>
+<dl><dt>${tr("aw")}</dt><dd>${e.m}<br><small class="mut">${b?"Mass number of the longest-lived known isotope; no standard atomic weight.":"Abridged standard atomic weight (relative, no unit)."}</small></dd><dt>${tr("gr")}</dt><dd>${f?"f-block (not numbered)":c+(z==71||z==103?" (IUPAC 2021 convention)":"")}</dd><dt>${tr("pe")}</dt><dd>${f?(r==9?6:7):r}</dd><dt>${tr("bk")}</dt><dd>${BLK[blk(z)][0]}</dd><dt>${tr("ca")}</dt><dd>${CATS[cat(z)][0]}</dd><dt>${tr("sa")}</dt><dd>${stN(z)}</dd></dl>
+<h3>${tr("ec")}</h3><p class="cf">${cfgStr(z)}</p><p class="mut">${EXC[z]?"This ground-state configuration is an exception to the simple filling order.":""}${z>103?"Predicted by the simple filling order; not established experimentally.":""}</p>
+<h3>${tr("sh")}: ${sh.join(", ")}</h3>${bohr(sh)}<p class="mut" style="font-size:13px">Simplified Bohr-style model for learning. In quantum mechanics electrons occupy orbitals (probability clouds), not circular tracks.</p>
+<details><summary>${tr("es")}</summary><p>${tr("x1")}</p></details>
+<div class="f"><button class="b" data-a="v" ${z==1?"disabled":""}>← ${z>1?D[z-2].s:""}</button><button class="b" data-a="n" ${z==118?"disabled":""}>${z<118?D[z].s:""} →</button><button class="b p" data-a="l">${tr("lt")}</button></div>
+<p class="mut" style="font-size:13px">Density, melting/boiling points, isotopes, history, uses and safety are not yet in this build — see Sources.</p>`}
+function route(){const h=decodeURIComponent(location.hash.slice(1)).toLowerCase(),e=D.find(x=>x.n.toLowerCase()==h);
+if(e){cur=e.z;P.innerHTML=panel(e);P.classList.add("o");P.setAttribute("aria-hidden","false");document.title=e.n+" — Elementa";P.querySelector(".x").focus()}
+else{const w=P.classList.contains("o");P.classList.remove("o");P.setAttribute("aria-hidden","true");document.title="Elementa — The Living Periodic Table";if(w&&last)last.focus()}}
+P.onclick=e=>{const a=e.target.closest("[data-a]")?.dataset.a;if(!a)return;if(a=="c")location.hash="";else if(a=="v")location.hash=D[cur-2].n.toLowerCase();else if(a=="n")location.hash=D[cur].n.toLowerCase();
+else if(a=="l"){lab.z=cur;$("le").value=cur;labR();location.hash="";go("lab")}};
+addEventListener("hashchange",route);document.addEventListener("keydown",e=>{if(e.key=="Escape"&&P.classList.contains("o"))location.hash=""});
+/* atomic lab */
+const lab={z:6,A:"",q:0};$("le").innerHTML=D.map(e=>`<option value="${e.z}">${e.z} · ${e.n} (${e.s})</option>`).join("");$("le").value=6;
+function labR(){const e=D[lab.z-1],q=lab.q,el=e.z-q,A=Math.round(+lab.A),o=$("lo");
+if(el<0||!Number.isInteger(q)){o.innerHTML="<p>An ion cannot lose more electrons than the neutral atom has.</p>";return}
+const sh=ion(shells(cfg(e.z)),q),ch=q?`<sup>${Math.abs(q)==1?"":Math.abs(q)}${q>0?"+":"−"}</sup>`:"";
+const nn=!lab.A?"enter a mass number":A<e.z?"mass number must be ≥ "+e.z:A-e.z;
+o.innerHTML=`<div>${bohr(sh)}</div><div><h3 style="margin:0 0 6px">${A&&A>=e.z?"<sup>"+A+"</sup>":""}${e.s}${ch} — ${e.n}</h3><dl><dt>${tr("pr")}</dt><dd>${e.z}</dd><dt>${tr("ne")}</dt><dd>${nn}</dd><dt>${tr("el")}</dt><dd>${el}${q?` (${e.z} ${q>0?"−":"+"} ${Math.abs(q)})`:""}</dd><dt>${tr("sh")}</dt><dd>${sh.join(", ")||"—"}</dd></dl>
+<p class="mut" style="font-size:13px">Shell-level simplification: ions lose outer-shell electrons first and gain electrons into the outer shell. Subshell detail of ions is not shown.</p><details><summary>${tr("es")}</summary><p>${tr("x2")}</p></details></div>`}
+$("le").onchange=e=>{lab.z=+e.target.value;labR()};$("la").oninput=e=>{lab.A=e.target.value;labR()};$("lq").oninput=e=>{lab.q=e.target.value===""?0:+e.target.value;labR()};
+/* quiz */
+const rnd=a=>a[Math.random()*a.length|0],shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);let Q={};
+function mk(pool){const e=rnd(pool),t=Math.random()*4|0,o=pool.filter(x=>x!==e);let q,f,x;
+if(t==0){q=`Which element has the symbol “${e.s}”?`;f=y=>y.n;x=`${e.s} is the symbol for ${e.n}.`}
+else if(t==1){q=`What is the chemical symbol of ${e.n}?`;f=y=>y.s;x=`${e.n} has the symbol ${e.s}.`}
+else if(t==2){q=`Which element has atomic number ${e.z}?`;f=y=>y.n;x=`Atomic number ${e.z} is ${e.n} (${e.s}).`}
+else{q=`How many electrons does a neutral ${e.n} atom have?`;f=y=>String(y.z);x=`A neutral atom has as many electrons as protons, so ${e.n} has ${e.z}.`}
+return{q,a:f(e),x,o:shuf([f(e),...shuf(o).slice(0,3).map(f)])}}
+function qShow(){const a=$("qa");if(Q.i>=5){a.innerHTML=`<h3>Score: ${Q.s} / 5</h3>${Q.w.length?"<p>Review:</p><ul>"+Q.w.map(w=>`<li>${w.q} → <b>${w.a}</b>. ${w.x}</li>`).join("")+"</ul>":"<p>Perfect round!</p>"}<button class="b p" onclick="qStart()">Retry</button>`;return}
+const k=Q.qs[Q.i];a.innerHTML=`<p><b>${Q.i+1}/5.</b> ${k.q}</p>`+k.o.map(o=>`<button class="qo" data-o="${o}">${o}</button>`).join("")+`<div id="fb"></div>`}
+$("qa").addEventListener("click",e=>{const b=e.target.closest(".qo");if(!b||b.disabled)return;const k=Q.qs[Q.i],r=b.dataset.o==k.a;document.querySelectorAll(".qo").forEach(x=>{x.disabled=true;if(x.dataset.o==k.a){x.classList.add("ok");x.textContent="✓ "+x.dataset.o}});
+if(r)Q.s++;else{b.classList.add("no");b.textContent="✗ "+b.dataset.o;Q.w.push(k)}$("fb").innerHTML=`<p><b>${r?"Correct.":"Not quite."}</b> ${k.x}</p><button class="b p" id="nx">${Q.i<4?"Next":"See score"}</button>`;$("nx").focus();$("nx").onclick=()=>{Q.i++;qShow()}});
+function qStart(){const pool=D.filter(e=>e.z<=+$("qd").value);Q={i:0,s:0,w:[],qs:Array.from({length:5},()=>mk(pool))};qShow()}$("qs").onclick=qStart;
+function go(id){$(id).scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})}
+$("lb").onclick=()=>{lang=lang=="en"?"bn":"en";applyLang()};
+$("tb").onclick=()=>{const d=document.documentElement,dark=d.dataset.theme?d.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;d.dataset.theme=dark?"light":"dark"};
+/* self-check */
+(()=>{const cells=new Set(),syms=new Set();let ok=D.length==118;D.forEach(e=>{cells.add(pos(e.z).join());syms.add(e.s);if(Object.values(cfg(e.z)).reduce((a,b)=>a+b,0)!=e.z)ok=false;if(!/^[A-Z][a-z]?$/.test(e.s))ok=false});
+$("st").innerHTML=`<b>Self-check (runs in your browser):</b> ${D.length} elements, ${syms.size} unique symbols, ${cells.size} unique grid cells, every electron configuration sums to its atomic number: <b>${ok&&cells.size==118&&syms.size==118?"pass":"FAIL"}</b>.`})();
+drawTable();prev(1);$("pv").textContent=tr("pv");labR();route();
+</script>
+<script src="config.js"></script><script src="reviews.js"></script>
+<script>
+/* Welcome <-> app views, same page. While the welcome screen is open the app is inert so keyboard/screen-reader users cannot reach hidden content. */
+(()=>{const W=document.getElementById("wl"),B=document.getElementById("enter"),parts=()=>document.querySelectorAll("header,main,footer,#p"),rm=()=>matchMedia("(prefers-reduced-motion:reduce)").matches;
+function enter(quiet){parts().forEach(e=>e.inert=false);document.documentElement.style.overflow="";W.classList.add("out");setTimeout(()=>{W.hidden=true},quiet||rm()?0:500);if(!quiet){scrollTo(0,0);const h=document.getElementById("top");h.tabIndex=-1;h.focus({preventScroll:true})}}
+window.showWelcome=()=>{W.hidden=false;void W.offsetWidth;W.classList.remove("out");parts().forEach(e=>e.inert=true);document.documentElement.style.overflow="hidden";B.focus()};
+B.onclick=()=>enter(false);
+/* a shared element link such as /#iron skips the welcome screen */
+if(location.hash.length>1)enter(true);else showWelcome()})();
+</script></body></html>

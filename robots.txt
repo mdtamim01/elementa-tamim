@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://elementa-by-tamim.netlify.app/sitemap.xml
